@@ -52,6 +52,8 @@ module.exports = {
         printWidth: 120,
         jsxSingleQuote: true
       }
-    ]
+    ],
+    '@typescript-eslint/no-unused-vars': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off'
   }
 }

@@ -15,7 +15,10 @@
   "dependencies": {
     "@tanstack/react-query": "^4.29.7",
     "@tanstack/react-query-devtools": "^4.29.7",
+    "@types/babel-generator": "^6.25.8",
+    "@types/babel__core": "^7.20.5",
     "@types/lodash": "^4.14.202",
+    "@uidotdev/usehooks": "^2.4.1",
     "axios": "^1.6.7",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
@@ -26,7 +29,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.16",
-    "@types/react": "^18.2.43",
+    "@types/react": "^18.2.54",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
