@@ -23,17 +23,15 @@ export default function PopoverWrapper({
     handleGetElementCoords(e)
   }
   return (
-    <div className='flex items-center justify-center h-screen'>
-      <div className='relative' ref={nodeRef}>
-        <div className='cursor-pointer' onClick={handleToggleSettings} ref={elmRef}>
-          {parentElement}
-        </div>
-        {show && (
-          <Popover coords={coords} position={position} className='bg-white rounded-2xl shadow w-[230px] py-6 px-5'>
-            {children}
-          </Popover>
-        )}
+    <div className='relative' ref={nodeRef}>
+      <div className='cursor-pointer' onClick={handleToggleSettings} ref={elmRef}>
+        {parentElement}
       </div>
+      {show && (
+        <Popover coords={coords} position={position} className='bg-white rounded-2xl shadow w-[230px] py-6 px-5'>
+          {children}
+        </Popover>
+      )}
     </div>
   )
 }

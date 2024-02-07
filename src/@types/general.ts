@@ -5,3 +5,4 @@ export type Coords = {
   width: number
   height: number
 }
+export enum Background {}
