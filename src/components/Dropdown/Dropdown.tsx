@@ -5,20 +5,33 @@ import { DropdownContext, UseDropdown } from './DropdownContext'
 import List from './List'
 import Options from './Options'
 import Select from './Select'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { createPortal } from 'react-dom'
 
-export default function Dropdown({ children }: { children: React.ReactNode }) {
+export default function Dropdown({
+  children,
+  title = 'Please Select Options'
+}: {
+  children: React.ReactNode
+  title?: string
+}) {
   const { show, setShow, nodeRef } = useClickOutSide()
+  const [label, setLabel] = useState(title)
   const handleToggle = () => {
     setShow((show) => !show)
   }
-  const value = { show, handleToggle, setShow }
-  return (
+  const onClickItem = (item: string) => {
+    setLabel(item)
+    setShow(false)
+  }
+  const value = { show, handleToggle, setShow, selectTitle: label, onClickItem }
+  return createPortal(
     <DropdownContext.Provider value={value}>
       <div className='w-full max-w-[300px] relative m-5' ref={nodeRef}>
         {children}
       </div>
-    </DropdownContext.Provider>
+    </DropdownContext.Provider>,
+    document.body
   )
 }
 Dropdown.Select = Select
