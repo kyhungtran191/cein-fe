@@ -1,3 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: normal;
+}
+body #root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  width: 100%;
+}
+*:focus {
+  outline: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@layer base {
+  .container {
+    @apply w-full max-w-[1200px] mx-auto px-[15px];
+  }
+  .section {
+    @apply mb-4 md:mb-10 lg:mb-16;
+  }
+  .section-heading {
+    @apply text-black text-xl md:text-2xl text-center font-semibold mb-6;
+  }
+  .section-desc {
+    @apply text-center text-darkGrey font-normal text-base;
+  }
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #bababa;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #bababa;
+}

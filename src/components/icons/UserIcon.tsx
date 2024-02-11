@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function UserIcon() {
+export default function UserIcon(props: JSX.IntrinsicElements['svg']) {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -9,6 +9,7 @@ export default function UserIcon() {
       strokeWidth={1.5}
       stroke='currentColor'
       className='w-6 h-6'
+      {...props}
     >
       <path
         strokeLinecap='round'
