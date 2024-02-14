@@ -10,7 +10,9 @@ interface IProps {
 
 export default function Tooltip({ coords, position, hovered, title }: IProps) {
   const stylePosition = position === 'right' ? '-translate-x-full' : ''
-
+  if (window.innerWidth < 1200) {
+    return null
+  }
   return createPortal(
     <div
       style={{

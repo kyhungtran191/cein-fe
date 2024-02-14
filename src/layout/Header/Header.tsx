@@ -56,7 +56,7 @@ export default function Header() {
               <NavLink
                 to={option.path}
                 className={({ isActive }: { isActive: boolean }) =>
-                  `${isActive ? 'font-bold ' : 'font-semibold'} text-base   px-3 py-2 transition duration-200`
+                  `${isActive ? 'font-bold ' : 'font-semibold'} text-base  px-3 py-2 transition-all hover:underline duration-200`
                 }
                 key={index}
               >

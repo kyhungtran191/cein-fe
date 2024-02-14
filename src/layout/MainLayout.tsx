@@ -6,7 +6,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   return (
     <React.Fragment>
       <Header></Header>
-      {children}
+      <div className='py-[72px]'>{children}</div>
       <Outlet></Outlet>
       {/* <Footer></Footer> */}
     </React.Fragment>
