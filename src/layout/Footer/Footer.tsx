@@ -5,7 +5,7 @@ import { routePath } from 'src/config/path'
 
 export default function Footer() {
   return (
-    <footer className='mt-auto py-[82px] bg-slate-100 border-t-2 shadow-md'>
+    <footer className='mt-auto py-[82px] bg-slate-200/70 border-t-2 shadow-md'>
       <div className='container'>
         <div className='flex flex-wrap items-start justify-between'>
           <div className='flex flex-col mb-4 w-full md:max-w-[258px] md:mb-0'>

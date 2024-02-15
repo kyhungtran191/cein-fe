@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -20,15 +21,24 @@ export default function Sidebar({
   position = 'right',
   onSidebarClose
 }: ISidebarProps) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden', 'pr-10')
+    } else {
+      document.body.classList.remove('overflow-hidden', 'pr-10')
+    }
+  }, [isOpen])
   return createPortal(
     <>
-      <div className={`fixed inset-0 z-40 ${!isOpen ? 'pointer-events-none' : 'pointer-events-auto'}`}>
+      <div
+        className={`fixed inset-0 z-40 ${!isOpen ? 'pointer-events-none overflow-auto' : 'pointer-events-auto overflow-hidden'}`}
+      >
         <div
-          className={`absolute inset-0 bg-black bg-opacity-30 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} transition-all duration-300`}
+          className={`z-30 absolute inset-0 bg-black bg-opacity-30 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} transition-all duration-300`}
           onClick={onSidebarClose}
         ></div>
         <div
-          className={`fixed top-0 ${position === 'right' ? 'right-0' : 'left-0'} min-h-screen z-50 p-10 px-4 w-[50vw] lg:w-[35vw] bg-white ${isOpen ? (position === 'right' ? 'translate-x-0' : '-translate-x-0') : position === 'right' ? 'translate-x-full' : '-translate-x-full'} transition-all duration-300 ease-in-out ${bodyClassName}`}
+          className={`fixed top-0 ${position === 'right' ? 'right-0' : 'left-0'} min-h-[100vh] z-50 p-10 px-4 min-w-[50vw] lg:min-w-[35vw] bg-white ${isOpen ? (position === 'right' ? 'translate-x-0' : '-translate-x-0') : position === 'right' ? 'translate-x-full' : '-translate-x-full'} transition-all duration-300 ease-in-out ${bodyClassName}`}
         >
           <div className='flex justify-end px-10'>
             <svg

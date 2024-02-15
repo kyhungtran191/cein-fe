@@ -5,6 +5,8 @@
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: normal;
+  height:auto;
+  overflow-x: hidden;
 }
 body #root {
   display: flex;
@@ -65,4 +67,10 @@ body #root {
     opacity 0.5s,
     transform 0.8s !important; /* Adjust the duration as needed */
   transform-origin: center center !important;
+}
+
+.react-responsive-modal-overlay,
+.react-responsive-modal-container,
+.react-responsive-modal-modal {
+  animation-fill-mode: forwards !important;
 }
