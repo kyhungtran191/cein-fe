@@ -23,6 +23,6 @@ export default function Tooltip({ coords, position, hovered, title }: IProps) {
     >
       {title}
     </div>,
-    document.querySelector('#root') as HTMLElement
+    document.querySelector('body') as HTMLElement
   )
 }

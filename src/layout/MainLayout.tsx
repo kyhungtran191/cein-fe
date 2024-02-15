@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Header from './Header/Header'
 import React from 'react'
 import Footer from './Footer/Footer'
+import Sidebar from 'src/components/Sidebar/Sidebar'
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (

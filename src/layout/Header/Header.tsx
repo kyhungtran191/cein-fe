@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { debounce } from 'lodash'
 import React, { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
@@ -5,8 +6,10 @@ import Tooltip from 'src/components/Tooltip/Tooltip'
 import TooltipWrapper from 'src/components/Tooltip/TooltipWrapper'
 import UserIcon from 'src/components/icons/UserIcon'
 import { routePath } from 'src/config/path'
+import { useMobileMenu } from 'src/global/useMobileMenu'
 import useClickOutSide from 'src/hooks/useClickOutSide'
 import { CartIcon, SearchIcon } from 'src/icons'
+import MobileMenu from 'src/icons/MobileMenu'
 
 export const menuOptions = [
   {
@@ -38,6 +41,7 @@ export const menuOptions = [
 export default function Header() {
   const [valueSearch, setValueSearch] = useState<string>('')
   const { nodeRef, show, setShow } = useClickOutSide()
+  const setMenuOn = useMobileMenu((state) => state.openMenu)
   const handleClickSearch = () => {
     setShow((s) => !s)
   }
@@ -47,8 +51,17 @@ export default function Header() {
   return (
     <header className='h-[72px] w-full fixed top-0 left-0 right-0 shadow-md z-30 bg-white text-black' ref={nodeRef}>
       <nav className='container h-full flex justify-between items-center leading-[72px] relative'>
+        <div className='block lg:hidden' onClick={() => setMenuOn()}>
+          <MobileMenu></MobileMenu>
+        </div>
         <div className='flex items-center'>
-          <Link to={routePath.home} className='flex items-center gap-x-3'>
+          <Link to={routePath.home} className='items-center hidden lg:flex gap-x-3 '>
+            <img src='./images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
+          </Link>
+          <Link
+            to={routePath.home}
+            className='flex items-center gap-x-3 -translate-x-[50%] absolute left-[50%] lg:hidden'
+          >
             <img src='./images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
           </Link>
           <div className='items-center hidden ml-8 lg:flex '>
