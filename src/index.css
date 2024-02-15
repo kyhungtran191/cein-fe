@@ -28,10 +28,10 @@ body #root {
     @apply mb-4 md:mb-10 lg:mb-16;
   }
   .section-heading {
-    @apply text-black text-xl md:text-2xl font-semibold mb-6;
+    @apply text-black text-xl md:text-2xl font-semibold mb-3;
   }
   .section-desc {
-    @apply text-center text-darkGrey font-normal text-base;
+    @apply text-center text-darkGrey font-normal text-base mb-3;
   }
 }
 ::-webkit-scrollbar {
@@ -53,4 +53,16 @@ body #root {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
   background: #bababa;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-weight: 900;
+  color: black;
+  box-shadow: 0;
+}
+.swiper-slide {
+  transition:
+    opacity 0.5s,
+    transform 0.8s !important; /* Adjust the duration as needed */
+  transform-origin: center center !important;
 }

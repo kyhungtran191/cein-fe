@@ -3,11 +3,12 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      colors: {
 
+      colors: {
+        "darkGrey": "#535050",
       },
       backgroundImage: {
-        'hero-pattern': 'url(/images/banner_cart.jpg)'
+        'hero-pattern': 'url(/images/banner.jpg)'
       },
       screens: {
         'medium': '990px'
@@ -17,5 +18,7 @@ module.exports = {
       'body': ['Poppins', 'sans-serif']
     }
   },
-  plugins: []
+  plugins: [
+    require('@tailwindcss/line-clamp')
+  ]
 }
