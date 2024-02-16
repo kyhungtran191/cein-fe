@@ -4,6 +4,9 @@ import CartPage from './pages/Cart/CartPage'
 import Homepage from './pages/Home/Homepage'
 import Products from './pages/Products/Products'
 import { useEffect } from 'react'
+import CartContent from './components/Sidebar/CartContent/CartContent'
+import MenuMobileContent from './components/Sidebar/MenuMobileContent/MenuMobileContent'
+import AuthModal from './components/Modal/AuthModal'
 
 function App() {
   const { pathname } = useLocation()
@@ -11,32 +14,37 @@ function App() {
     window.scrollTo(0, 0)
   }, [pathname])
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={
-          <MainLayout>
-            <Homepage></Homepage>
-          </MainLayout>
-        }
-      ></Route>
-      <Route
-        path='/cart'
-        element={
-          <MainLayout>
-            <CartPage></CartPage>
-          </MainLayout>
-        }
-      ></Route>
-      <Route
-        path='products'
-        element={
-          <MainLayout>
-            <Products></Products>
-          </MainLayout>
-        }
-      ></Route>
-    </Routes>
+    <>
+      <CartContent></CartContent>
+      <MenuMobileContent></MenuMobileContent>
+      <AuthModal></AuthModal>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <MainLayout>
+              <Homepage></Homepage>
+            </MainLayout>
+          }
+        ></Route>
+        <Route
+          path='/cart'
+          element={
+            <MainLayout>
+              <CartPage></CartPage>
+            </MainLayout>
+          }
+        ></Route>
+        <Route
+          path='products'
+          element={
+            <MainLayout>
+              <Products></Products>
+            </MainLayout>
+          }
+        ></Route>
+      </Routes>
+    </>
   )
 }
 

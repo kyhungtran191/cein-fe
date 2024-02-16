@@ -1,40 +1,20 @@
-/* eslint-disable no-extra-boolean-cast */
 import React from 'react'
-type InputProps = {
-  wrapperClassName?: string
-  className?: string
-  iconClassName?: string
-  type?: string
-  icon?: React.ReactNode | JSX.Element
-  onIconClick?: () => void
-} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-const Input = ({
-  type = 'text',
-  className = '',
-  wrapperClassName = '',
-  iconClassName = 'right-5',
-  onIconClick = () => null,
-  icon,
-  ...rest
-}: InputProps) => {
+type InputProps = {
+  className?: string
+  type: string
+  name?: string
+  id?: string
+} & React.InputHTMLAttributes<HTMLInputElement>
+export default function Input({ className, type, name, id, ...rest }: InputProps) {
   return (
-    <div className={`relative ${wrapperClassName}`}>
-      <input
-        type={type}
-        className={`px-5 h-14 border border-gray-200 rounded-lg outline-none w-full transition-all focus:border-blue-500 text-slate-900 ${className}`}
-        {...rest}
-      />
-      {icon && (
-        <button
-          className={`absolute top-2/4 -translate-y-2/4 ${iconClassName} ${!!onIconClick ? 'cursor-pointer' : ''}`}
-          onClick={onIconClick}
-        >
-          {icon}
-        </button>
-      )}
-    </div>
+    <input
+      type={type}
+      name={name}
+      id={id}
+      placeholder=''
+      className={`block py-2.5 px-0 w-full text-base text-gray-900 !bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white font-medium focus:outline-none focus:ring-0 focus:border-blue-400 peer relative ${className}`}
+      {...rest}
+    />
   )
 }
-
-export default Input

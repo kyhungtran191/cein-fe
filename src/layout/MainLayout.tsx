@@ -5,6 +5,7 @@ import Footer from './Footer/Footer'
 import Sidebar from 'src/components/Sidebar/Sidebar'
 import CartContent from 'src/components/Sidebar/CartContent/CartContent'
 import MenuMobileContent from 'src/components/Sidebar/MenuMobileContent/MenuMobileContent'
+import AuthModal from 'src/components/Modal/AuthModal'
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,8 +14,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <div className='py-[72px]'>{children}</div>
       <Outlet></Outlet>
       <Footer></Footer>
-      <CartContent></CartContent>
-      <MenuMobileContent></MenuMobileContent>
     </React.Fragment>
   )
 }

@@ -6,6 +6,7 @@ import Tooltip from 'src/components/Tooltip/Tooltip'
 import TooltipWrapper from 'src/components/Tooltip/TooltipWrapper'
 import UserIcon from 'src/components/icons/UserIcon'
 import { routePath } from 'src/config/path'
+import { useAuthModal } from 'src/global/useAuthModal'
 import { useCartList } from 'src/global/useCartList'
 import { useMobileMenu } from 'src/global/useMobileMenu'
 import useClickOutSide from 'src/hooks/useClickOutSide'
@@ -43,7 +44,8 @@ export default function Header() {
   const [valueSearch, setValueSearch] = useState<string>('')
   const { nodeRef, show, setShow } = useClickOutSide()
   const { openMenu } = useMobileMenu((state) => state)
-  const { open, closeCart, openCart } = useCartList((state) => state)
+  const { openCart } = useCartList((state) => state)
+  const { openAuth } = useAuthModal((state) => state)
   const handleClickSearch = () => {
     setShow((s) => !s)
   }
@@ -93,7 +95,7 @@ export default function Header() {
             title='Search Products Now'
             position='right'
           ></TooltipWrapper>
-          <UserIcon className='cursor-pointer' width={24} height={24}></UserIcon>
+          <UserIcon className='cursor-pointer' width={24} height={24} onClick={() => openAuth()}></UserIcon>
           <CartIcon className='cursor-pointer' width={22} height={22} onClick={() => openCart()}></CartIcon>
         </div>
       </nav>
