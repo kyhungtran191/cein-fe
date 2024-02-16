@@ -7,7 +7,7 @@ interface AuthModal {
 }
 
 export const useAuthModal = create<AuthModal>((set) => ({
-  open: true,
+  open: false,
   openAuth: () => set(() => ({ open: true })),
   closeAuth: () => set({ open: false })
 }))
