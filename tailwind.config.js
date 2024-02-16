@@ -13,7 +13,7 @@ module.exports = {
         "smoothGrey": "#EAEAEA",
         "whiteSlay": "#F4F4F4",
         "yellowLinear": "#BB7E2F",
-        "footer": "#F8F8F8",
+        "footer": "#F5F4F4",
       },
       backgroundImage: {
         'hero-pattern': 'url(/images/banner.jpg)'

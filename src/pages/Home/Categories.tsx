@@ -8,38 +8,8 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/autoplay'
-const CategoriesArray = [
-  {
-    link: '/products?category=shirts',
-    image: './images/shirt.png',
-    title: 'Shirt'
-  },
-  {
-    link: '/products?category=denim',
-    image: './images/denim.png',
-    title: 'Denim'
-  },
-  {
-    link: '/products?category=tees',
-    image: './images/tee.png',
-    title: 'Tee'
-  },
-  {
-    link: '/products?category=pants',
-    image: './images/pants.png',
-    title: 'Pants'
-  },
-  {
-    link: '/products?category=sweaters',
-    image: './images/sweater.png',
-    title: 'Sweaters'
-  },
-  {
-    link: '/products?category=outerwear',
-    image: './images/outerwear.png',
-    title: 'Outerwear'
-  }
-]
+import { CategoriesArray } from 'src/utils/constant'
+
 export default function Categories() {
   return (
     <section className='section'>

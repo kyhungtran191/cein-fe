@@ -7,7 +7,7 @@ interface CartList {
 }
 
 export const useCartList = create<CartList>((set) => ({
-  open: true,
+  open: false,
   openCart: () => set(() => ({ open: true })),
   closeCart: () => set({ open: false })
 }))

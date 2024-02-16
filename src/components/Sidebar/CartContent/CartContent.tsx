@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useCartList } from 'src/global/useCartList'
 import Sidebar from '../Sidebar'
 import { Link } from 'react-router-dom'
@@ -8,6 +8,7 @@ import Button from 'src/components/Button/Button'
 
 export default function CartContent() {
   const { open, closeCart } = useCartList((state) => state)
+
   return (
     <Sidebar isOpen={open} position='right' onSidebarClose={closeCart} bodyClassName=''>
       <h2 className='text-2xl font-semibold'>Your Cart</h2>

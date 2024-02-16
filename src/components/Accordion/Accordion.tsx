@@ -8,9 +8,10 @@ interface AccordionProps {
   className?: string
   contentClassName?: string
   title: string
+  open?: boolean
 }
-const Accordion = ({ children, title, className = '', contentClassName = '' }: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false)
+const Accordion = ({ children, title, className = '', contentClassName = '', open = false }: AccordionProps) => {
+  const [isOpen, setIsOpen] = useState(open)
   const [contentHeight, setContentHeight] = useState(0)
   const contentRef = useRef(null)
 
@@ -26,7 +27,7 @@ const Accordion = ({ children, title, className = '', contentClassName = '' }: A
   return (
     <div className={className}>
       <div
-        className='flex items-center justify-between gap-5 p-4 text-sm font-medium text-white capitalize rounded-lg cursor-pointer'
+        className='flex items-center justify-between gap-5 text-xl font-medium text-black capitalize rounded-lg cursor-pointer'
         onClick={handleToggle}
       >
         <span>{title}</span>

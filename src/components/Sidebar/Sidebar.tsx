@@ -21,13 +21,7 @@ export default function Sidebar({
   position = 'right',
   onSidebarClose
 }: ISidebarProps) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add('overflow-hidden', 'pr-10')
-    } else {
-      document.body.classList.remove('overflow-hidden', 'pr-10')
-    }
-  }, [isOpen])
+  
   return createPortal(
     <>
       <div

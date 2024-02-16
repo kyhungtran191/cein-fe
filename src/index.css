@@ -5,7 +5,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   font-weight: normal;
-  height:auto;
+  height: auto;
   overflow-x: hidden;
 }
 body #root {
@@ -25,6 +25,9 @@ body #root {
 @layer base {
   .container {
     @apply w-full max-w-[1200px] mx-auto px-[15px];
+  }
+  .product-container {
+    @apply w-full max-w-[1600px] mx-auto px-[15px];
   }
   .section {
     @apply mb-4 md:mb-10 lg:mb-16;
