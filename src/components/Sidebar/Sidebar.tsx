@@ -21,7 +21,6 @@ export default function Sidebar({
   position = 'right',
   onSidebarClose
 }: ISidebarProps) {
-  
   return createPortal(
     <>
       <div
@@ -32,7 +31,7 @@ export default function Sidebar({
           onClick={onSidebarClose}
         ></div>
         <div
-          className={`fixed top-0 ${position === 'right' ? 'right-0' : 'left-0'} min-h-[100vh] z-50 p-10 px-4 min-w-[50vw] lg:min-w-[35vw] bg-white ${isOpen ? (position === 'right' ? 'translate-x-0' : '-translate-x-0') : position === 'right' ? 'translate-x-full' : '-translate-x-full'} transition-all duration-300 ease-in-out ${bodyClassName}`}
+          className={`fixed top-0 ${position === 'right' ? 'right-0' : 'left-0'} min-h-[100vh] z-50 p-10 px-4 min-w-[40vw] lg:min-w-[35vw] bg-white ${isOpen ? (position === 'right' ? 'translate-x-0' : '-translate-x-0') : position === 'right' ? 'translate-x-full' : '-translate-x-full'} transition-all duration-300 ease-in-out ${bodyClassName}`}
         >
           <div className='flex justify-end px-10'>
             <svg

@@ -27,11 +27,11 @@ export default function Dropdown({
   const value = { show, handleToggle, setShow, selectTitle: label, onClickItem }
   return createPortal(
     <DropdownContext.Provider value={value}>
-      <div className='w-full max-w-[300px] relative m-5' ref={nodeRef}>
+      <div className='w-full max-w-[300px] relative m-5 ' ref={nodeRef}>
         {children}
       </div>
     </DropdownContext.Provider>,
-    document.body
+    document.querySelector('#root') as HTMLElement
   )
 }
 Dropdown.Select = Select

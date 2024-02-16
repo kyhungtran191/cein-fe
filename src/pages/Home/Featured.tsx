@@ -1,36 +1,8 @@
 import React from 'react'
 import Button from 'src/components/Button/Button'
 import ProductList from 'src/components/Product/ProductList'
-const productList = [
-  {
-    _id: '1',
-    images: ['./images/bag1.png', './images/bag2.png'],
-    featured_image: './images/bag2.png',
-    original_price: 29.99,
-    sale_price: 19.99,
-    name: 'Product 1',
-    category: 'Electronics'
-  },
-  {
-    _id: '2',
-    images: ['./images/bag2.png', './images/bag1.png'],
-    featured_image: './images/bag1.png',
-    original_price: 39.99,
-    sale_price: 29.99,
-    name: 'Product 2',
-    category: 'Clothing'
-  },
-  {
-    _id: '3',
-    images: ['./images/bag1.png', 'image6.jpg'],
-    featured_image: './images/bag2.png',
-    original_price: 49.99,
-    sale_price: 39.99,
-    name: 'Product 3',
-    category: 'Home & Kitchen'
-  }
-  // Add more products as needed
-]
+import { productList } from 'src/utils/constant'
+
 export default function Featured() {
   return (
     <div className='section'>

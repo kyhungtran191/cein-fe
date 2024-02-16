@@ -12,7 +12,7 @@ export default function CartContent() {
   return (
     <Sidebar isOpen={open} position='right' onSidebarClose={closeCart} bodyClassName=''>
       <h2 className='text-2xl font-semibold'>Your Cart</h2>
-      <div className='mt-2 max-h-[60vh] overflow-y-scroll'>
+      <div className='mt-2 max-h-[60vh] overflow-y-scroll p-2 md:p-4'>
         {Array(5)
           .fill(0)
           .map((item, index) => (
@@ -20,7 +20,7 @@ export default function CartContent() {
               <Link to='/products/1' className='h-[150px] w-[150p] sm:h-[204px] sm:w-[204px] flex-shrink-0'>
                 <img src='../images/bag1.png' alt='cart-item' className='object-cover w-full h-full' />
               </Link>
-              <div className='flex-1 px-4'>
+              <div className='flex-1 px-2 md:px-4'>
                 <div className='flex items-center justify-between'>
                   <h3 className='text-xl font-semibold text-black sm:text-2xl'>Bag1</h3>
                   <Close className='cursor-pointer'></Close>
@@ -37,7 +37,7 @@ export default function CartContent() {
             </div>
           ))}
       </div>
-      <div className='absolute left-0 bottom-0 h-[205px] text-black right-0 py-5 px-9'>
+      <div className='absolute left-0 bottom-0 h-[205px] text-black right-0 py-5 px-9 bg-white'>
         <div className='flex items-center justify-between w-full'>
           <div>
             <span className='text-xl font-semibold'>Subtotal</span> <span>(2 items)</span>
