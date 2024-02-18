@@ -66,7 +66,7 @@ export default function Header() {
             to={routePath.home}
             className='flex items-center gap-x-3 -translate-x-[50%] absolute left-[50%] lg:hidden'
           >
-            <img src='./images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
+            <img src='../images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
           </Link>
           <div className='items-center hidden ml-8 lg:flex '>
             {menuOptions.map((option, index) => (
