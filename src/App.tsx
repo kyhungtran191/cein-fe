@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import CartContent from './components/Sidebar/CartContent/CartContent'
 import MenuMobileContent from './components/Sidebar/MenuMobileContent/MenuMobileContent'
 import AuthModal from './components/Modal/AuthModal'
+import ProductDetail from './pages/ProductDetail/ProductDetail'
 
 function App() {
   const { pathname } = useLocation()
@@ -40,6 +41,14 @@ function App() {
           element={
             <MainLayout>
               <Products></Products>
+            </MainLayout>
+          }
+        ></Route>
+        <Route
+          path='products/:id'
+          element={
+            <MainLayout>
+              <ProductDetail></ProductDetail>
             </MainLayout>
           }
         ></Route>

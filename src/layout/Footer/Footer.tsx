@@ -10,7 +10,7 @@ export default function Footer() {
         <div className='flex flex-wrap items-start justify-between'>
           <div className='flex flex-col mb-4 w-full md:max-w-[258px] md:mb-0'>
             <Link to={routePath.home} className='flex items-center gap-x-3'>
-              <img src='./images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
+              <img src='../images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
             </Link>
             <p className='mt-4 text-sm'>
               <span className='font-semibold'>Address</span> Binh Tri Dong, Binh Tan district

@@ -60,7 +60,7 @@ export default function Header() {
         </div>
         <div className='flex items-center'>
           <Link to={routePath.home} className='items-center hidden lg:flex gap-x-3 '>
-            <img src='./images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
+            <img src='../images/logo.png' alt='logo' className='w-[86px] h-[20px] object-contain' />
           </Link>
           <Link
             to={routePath.home}
