@@ -1,14 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { useCartList } from 'src/global/useCartList'
 import Sidebar from '../Sidebar'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Close from 'src/icons/Close'
 import QuantityController from 'src/components/QuantityController/QuantityController'
 import Button from 'src/components/Button/Button'
 
 export default function CartContent() {
   const { open, closeCart } = useCartList((state) => state)
-
+  const { pathname } = useLocation()
+  useEffect(() => {
+    closeCart()
+  }, [pathname])
   return (
     <Sidebar isOpen={open} position='right' onSidebarClose={closeCart} bodyClassName=''>
       <h2 className='text-2xl font-semibold'>Your Cart</h2>
@@ -44,10 +48,15 @@ export default function CartContent() {
           </div>
           <span className='text-xl font-semibold'>$202</span>
         </div>
-        <Button className='my-8 font-thin text-white uppercase bg-mediumGrey hover:bg-mediumGrey/90'>
+        <Link
+          to='/cart'
+          className='flex items-center justify-center w-full px-3 py-3 my-4 font-semibold text-center text-white uppercase transition duration-300 bg-green-600 hover:bg-green-600/90'
+        >
+          Go to Cart
+        </Link>
+        <Button className='font-thin text-white uppercase bg-mediumGrey hover:bg-mediumGrey/90'>
           Continue To Checkout
         </Button>
-        <p className='text-center'>Psst, get it now before it sells out.</p>
       </div>
     </Sidebar>
   )

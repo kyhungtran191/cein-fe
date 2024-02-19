@@ -1,10 +1,21 @@
-import React, { useEffect } from 'react'
+/* eslint-disable import/no-unresolved */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Accordion from 'src/components/Accordion/Accordion'
 import Button from 'src/components/Button/Button'
+import RatingStar from 'src/icons/RatingStar'
+import RatingStart from 'src/icons/RatingStar'
 import { colors } from 'src/utils/constant'
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
 
 export default function ProductDetail() {
+  const [isReview, setIsReview] = useState(false)
   useEffect(() => {
     const handleScrollFixedDetailProductInfo = () => {
       if (window.scrollY >= 90) {
@@ -29,11 +40,31 @@ export default function ProductDetail() {
                 <img
                   src='../images/detail.jpg'
                   alt=''
-                  className='object-cover w-full sm:h-[360px] medium:h-[508px]'
+                  className='object-cover w-full sm:h-[360px] medium:h-[508px] hidden sm:block'
                   key={index}
                 />
               ))}
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              pagination
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false
+              }}
+              spaceBetween={10}
+              slidesPerView={1}
+              className='relative block w-full h-full col-span-3 sm:hidden'
+            >
+              {Array(6)
+                .fill(0)
+                .map((item, index) => (
+                  <SwiperSlide key={index}>
+                    <img src='../images/detail.jpg' alt='' className='object-cover w-full sm:h-[650px]' key={index} />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
           </div>
+
           <div className='col-span-3 sm:col-span-1'>
             <div className='px-3 py-2 ' id='product-info'>
               <h2 className='section-heading'>The ReWool® Oversized Shirt Jacket</h2>
@@ -101,7 +132,56 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
-        <div>safasd</div>
+        <div className='grid grid-cols-2 gap-5 text-xl font-semibold'>
+          <div
+            className={`col-span-1 py-5 text-center border-b-2 cursor-pointer ${!isReview ? 'text-black border-b-black' : 'text-slate-400 border-b-slate-400'}`}
+            onClick={() => setIsReview(false)}
+          >
+            Product Detail
+          </div>
+          <div
+            onClick={() => setIsReview(true)}
+            className={`col-span-1 py-5 text-center border-b-2 cursor-pointer  ${isReview ? 'text-black border-black' : 'text-slate-400 border-b-slate-400'}`}
+          >
+            Reviews
+          </div>
+        </div>
+        <div className='pt-8'>
+          {isReview &&
+            Array(5)
+              .fill(0)
+              .map((item, index) => (
+                <div className='flex items-start gap-2 p-4 my-5 border rounded-lg cursor-pointer' key={index}>
+                  <div className='w-[40px] h-[40px] flex-shrink-0'>
+                    <img
+                      src='https://source.unsplash.com/random'
+                      alt='avatar-comment'
+                      className='w-full h-full rounded-full'
+                    />
+                  </div>
+                  <div>
+                    <div className='flex items-center justify-between'>
+                      <h3 className='mb-1 font-semibold text-md'>ElizabethRBklyn</h3>
+                      <div>22/10/2023</div>
+                    </div>
+                    <div className='flex items-center'>
+                      {Array(5)
+                        .fill(0)
+                        .map((item, index) => (
+                          <RatingStar key={index} className='w-4 h-4'></RatingStar>
+                        ))}
+                    </div>
+                    <div className='my-2 overflow-hidden text-xs text-justify sm:text-sm medium:text-base text-ellipsis line-clamp-3'>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus dolores facilis quae quaerat,
+                      autem consectetur enim nostrum similique beatae illum quasi incidunt. Reprehenderit, fuga? Ducimus
+                      asperiores quis veniam nobis officia? Dolorum repellat animi dolore dolorem voluptatum vitae?
+                      Quibusdam, consectetur doloribus itaque laboriosam, aliquid quam minus repudiandae culpa
+                      voluptatum incidunt rerum quaerat repellat quos. Nesciunt natus ex labore modi. Cupiditate, ipsum.
+                    </div>
+                  </div>
+                </div>
+              ))}
+        </div>
       </div>
     </div>
   )
