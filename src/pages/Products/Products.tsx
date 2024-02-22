@@ -15,6 +15,7 @@ import { colors, productList } from 'src/utils/constant'
 export default function Products() {
   const [isFilter, setIsFilter] = useState<boolean>(false)
   const params = useQueryParams()
+  console.log(params)
   useEffect(() => {
     document.title = 'Product List'
     return () => {
@@ -110,10 +111,7 @@ export default function Products() {
               <div className='flex flex-wrap items-center justify-between gap-3 mb-3'>
                 <p className='text-base font-medium text-darkGrey'>Found 16 results</p>
                 <FilterProduct></FilterProduct>
-                <Button
-                  className='block text-white bg-black rounded-lg w-max md:hidden'
-                  onClick={() => setIsFilter((s) => !s)}
-                >
+                <Button className='block text-white bg-black rounded-lg w-max md:hidden'>
                   <Filter></Filter>
                 </Button>
                 {/* Dropdown */}

@@ -47,7 +47,7 @@ export const productList = [
   {
     _id: '1',
     images: ['./images/bag1.png', './images/bag2.png'],
-    featured_image: './images/bag2.png',
+    featured_image: 'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/465760/sub/goods_465760_sub14.jpg',
     original_price: 29.99,
     sale_price: 19.99,
     name: 'Product 1',
