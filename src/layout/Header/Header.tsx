@@ -1,7 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+import { useMutation } from '@tanstack/react-query'
 import { debounce } from 'lodash'
 import React, { useContext, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { User } from 'src/@types/auth'
+import { logOutApi } from 'src/apis/auth.api'
 import PopoverWrapper from 'src/components/Popover/PopoverWrapper'
 import Tooltip from 'src/components/Tooltip/Tooltip'
 import TooltipWrapper from 'src/components/Tooltip/TooltipWrapper'
@@ -16,6 +20,7 @@ import { CartIcon, SearchIcon } from 'src/icons'
 import Logout from 'src/icons/Logout'
 import MobileMenu from 'src/icons/MobileMenu'
 import Setting from 'src/icons/Setting'
+import { getUserFromLS } from 'src/utils/auth'
 
 export const menuOptions = [
   {
@@ -50,14 +55,21 @@ export default function Header() {
   const { openMenu } = useMobileMenu((state) => state)
   const { openCart } = useCartList((state) => state)
   const { openAuth } = useAuthModal((state) => state)
-  const { isAuthenticated, profile } = useContext(AppContext)
+  const { isAuthenticated, profile, setIsAuthenticated } = useContext(AppContext)
   const handleClickSearch = () => {
     setShow((s) => !s)
   }
   function handleInputSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setValueSearch(e.target.value)
   }
-  console.log(profile?.fullName)
+  const userData: User = getUserFromLS() || {}
+  const logOutMutation = useMutation({
+    mutationFn: logOutApi,
+    onSuccess: () => {
+      setIsAuthenticated(false)
+      toast.success('Logout successfully')
+    }
+  })
   return (
     <header className='h-[72px] w-full fixed top-0 left-0 right-0 shadow-md z-30 bg-white text-black' ref={nodeRef}>
       <nav className='container h-full flex justify-between items-center leading-[72px] relative'>
@@ -114,7 +126,7 @@ export default function Header() {
                     alt=''
                     className='flex-shrink-0 w-6 h-6 rounded-full select-none'
                   />
-                  <div className='font-semibold select-none'>{profile.fullName}</div>
+                  <div className='font-semibold select-none'>{userData?.fullName}</div>
                 </div>
               }
               className='rounded-none w-max'
@@ -130,7 +142,12 @@ export default function Header() {
                 <div className='flex items-center justify-start gap-2 py-4 transition duration-300 border-b cursor-pointer hover:text-blue-500'>
                   <Setting></Setting>Settings
                 </div>
-                <div className='flex items-center justify-start gap-2 py-4 transition duration-300 cursor-pointer hover:text-blue-500'>
+                <div
+                  className='flex items-center justify-start gap-2 py-4 transition duration-300 cursor-pointer hover:text-blue-500'
+                  onClick={() => {
+                    logOutMutation.mutate()
+                  }}
+                >
                   {' '}
                   <Logout></Logout>Logout
                 </div>

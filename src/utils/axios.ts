@@ -1,5 +1,5 @@
 import axios, { type AxiosInstance } from 'axios'
-import { saveAccessTokenToLS, saveRefreshTokenToLS, saveUserToLS, getAccessTokenFromLS } from './auth'
+import { saveAccessTokenToLS, saveRefreshTokenToLS, saveUserToLS, getAccessTokenFromLS, clearLS } from './auth'
 import { AuthData } from 'src/@types/auth'
 
 class Http {
@@ -30,11 +30,16 @@ class Http {
     )
     this.instance.interceptors.response.use(
       (response) => {
-        if (response.config.url == '/auth/login' || response.config.url == '/auth/signup') {
+        console.log(response.config.url)
+        if (response.config.url === '/auth/login' || response.config.url === '/auth/signup') {
           const data = response.data as AuthData
+          console.log(data)
           saveAccessTokenToLS(data.data.access_token)
           saveRefreshTokenToLS(data.data.refresh_token)
           saveUserToLS(data.data.user)
+        } else if (response.config.url === '/auth/logout') {
+          this.access_token = ''
+          clearLS()
         }
         return response
       },

@@ -15,7 +15,7 @@ import { loginApi } from 'src/apis/auth.api'
 import { toast } from 'react-toastify'
 import { AppContext } from 'src/contexts/app.context'
 export default function AuthModal() {
-  const { isAuthenticated } = useContext(AppContext)
+  const { isAuthenticated, setIsAuthenticated, setProfile } = useContext(AppContext)
   const { open, closeAuth } = useAuthModal((state) => state)
   const [isLogin, setIsLogin] = useState<boolean>(true)
   const {
@@ -38,8 +38,8 @@ export default function AuthModal() {
   // Mutation
   const loginMutation = useMutation({
     mutationFn: loginApi,
-    onSuccess: (data) => {
-      console.log(data.data.data)
+    onSuccess: () => {
+      setIsAuthenticated(true)
       toast.success('Login Successfully!')
       reset()
       closeAuth()

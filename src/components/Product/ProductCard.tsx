@@ -62,6 +62,13 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* bottom */}
         <div className='py-3'>
           <h2 className='font-medium h-[28px] line-clamp-1 overflow-hidden'>{name}</h2>
+          <div className='flex items-center gap-2 my-2'>
+            {colors.slice(0, 3).map((item, index) => {
+              return (
+                <div key={index} className='w-[20px] h-[20px] rounded-full' style={{ backgroundColor: item.hex }}></div>
+              )
+            })}
+          </div>
           <div className='flex items-center gap-2'>
             {/* origin price */}
             <p className='text-xs font-semibold text-red-500 line-through'>${original_price}</p>
