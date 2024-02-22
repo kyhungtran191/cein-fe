@@ -14,7 +14,7 @@ export default function Input({ className, type, name, id, ...rest }: InputProps
   return (
     <>
       <input
-        type={(type == 'password' && togglePassword ? 'text' : 'password') || type}
+        type={type == 'password' ? (togglePassword ? 'text' : 'password') : type}
         name={name}
         id={id}
         placeholder=''

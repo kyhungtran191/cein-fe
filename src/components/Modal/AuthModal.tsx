@@ -1,57 +1,29 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import Modal from './Modal'
 import { useAuthModal } from 'src/global/useAuthModal'
 import Input from '../Input/Input'
 import Label from '../Label/Label'
 import Button from '../Button/Button'
 import { Link } from 'react-router-dom'
-import * as yup from 'yup'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-const isAuth = false
-
-type LoginFormData = {
-  email: string
-  password: string
-}
-
-type SignUpFormData = {
-  name: string
-  email: string
-  password: string
-  confirm_password: string
-}
-
+import { LoginData, SignUpData } from 'src/@types/auth'
+import { loginSchema, signUpSchema } from 'src/validators/auth.validator'
+import { useMutation } from '@tanstack/react-query'
+import { loginApi } from 'src/apis/auth.api'
+import { toast } from 'react-toastify'
+import { AppContext } from 'src/contexts/app.context'
 export default function AuthModal() {
+  const { isAuthenticated } = useContext(AppContext)
   const { open, closeAuth } = useAuthModal((state) => state)
   const [isLogin, setIsLogin] = useState<boolean>(true)
-  //Define Schema
-  //Login
-  const loginSchema = yup
-    .object({
-      email: yup.string().email('Your provided email is invald').required('Please provide your email'),
-      password: yup.string().required('Please provide password').min(8, 'Password must be at least 8 characters')
-    })
-    .required()
-  //SignUp
-  const signUpSchema = yup
-    .object({
-      name: yup.string().required('Please provide your name'),
-      email: yup.string().email('Your provided email is invald').required('Please provide your email'),
-      password: yup.string().required('Please provide password').min(8, 'Password must be at least 8 characters'),
-      confirm_password: yup
-        .string()
-        .oneOf([yup.ref('password')], 'Passwords is not match')
-        .required('Please provide confirm password')
-    })
-    .required()
-  //Define form validate
   const {
     control: loginControl,
     handleSubmit: handleSubmitLogin,
+    reset,
     formState: { errors: loginErrors }
-  } = useForm<LoginFormData>({
+  } = useForm<LoginData>({
     resolver: yupResolver(loginSchema)
   })
 
@@ -59,14 +31,27 @@ export default function AuthModal() {
     control: signUpControl,
     handleSubmit: handleSubmitSignUp,
     formState: { errors: signUpErrors }
-  } = useForm<SignUpFormData>({
+  } = useForm<SignUpData>({
     resolver: yupResolver(signUpSchema)
   })
 
-  const onSubmitLogin: SubmitHandler<LoginFormData> = (data) => console.log(data)
-  const onSubmitSignUp: SubmitHandler<SignUpFormData> = (data) => console.log(data)
+  // Mutation
+  const loginMutation = useMutation({
+    mutationFn: loginApi,
+    onSuccess: (data) => {
+      console.log(data.data.data)
+      toast.success('Login Successfully!')
+      reset()
+      closeAuth()
+    }
+  })
 
-  if (isAuth) return null
+  const onSubmitLogin: SubmitHandler<LoginData> = (data) => {
+    loginMutation.mutate(data)
+  }
+  const onSubmitSignUp: SubmitHandler<SignUpData> = (data) => console.log(data)
+
+  if (isAuthenticated) return null
   return (
     <Modal
       isOpen={open}

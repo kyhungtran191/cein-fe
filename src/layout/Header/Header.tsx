@@ -1,17 +1,21 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { debounce } from 'lodash'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import PopoverWrapper from 'src/components/Popover/PopoverWrapper'
 import Tooltip from 'src/components/Tooltip/Tooltip'
 import TooltipWrapper from 'src/components/Tooltip/TooltipWrapper'
 import UserIcon from 'src/components/icons/UserIcon'
 import { routePath } from 'src/config/path'
+import { AppContext } from 'src/contexts/app.context'
 import { useAuthModal } from 'src/global/useAuthModal'
 import { useCartList } from 'src/global/useCartList'
 import { useMobileMenu } from 'src/global/useMobileMenu'
 import useClickOutSide from 'src/hooks/useClickOutSide'
 import { CartIcon, SearchIcon } from 'src/icons'
+import Logout from 'src/icons/Logout'
 import MobileMenu from 'src/icons/MobileMenu'
+import Setting from 'src/icons/Setting'
 
 export const menuOptions = [
   {
@@ -46,12 +50,14 @@ export default function Header() {
   const { openMenu } = useMobileMenu((state) => state)
   const { openCart } = useCartList((state) => state)
   const { openAuth } = useAuthModal((state) => state)
+  const { isAuthenticated, profile } = useContext(AppContext)
   const handleClickSearch = () => {
     setShow((s) => !s)
   }
   function handleInputSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setValueSearch(e.target.value)
   }
+  console.log(profile?.fullName)
   return (
     <header className='h-[72px] w-full fixed top-0 left-0 right-0 shadow-md z-30 bg-white text-black' ref={nodeRef}>
       <nav className='container h-full flex justify-between items-center leading-[72px] relative'>
@@ -95,8 +101,42 @@ export default function Header() {
             title='Search Products Now'
             position='right'
           ></TooltipWrapper>
-          <UserIcon className='cursor-pointer' width={24} height={24} onClick={() => openAuth()}></UserIcon>
+          {!isAuthenticated && (
+            <UserIcon className='cursor-pointer' width={24} height={24} onClick={() => openAuth()}></UserIcon>
+          )}
           <CartIcon className='cursor-pointer' width={22} height={22} onClick={() => openCart()}></CartIcon>
+          {isAuthenticated && profile && (
+            <PopoverWrapper
+              parentElement={
+                <div className='flex-wrap items-center hidden md:flex gap-x-2'>
+                  <img
+                    src='https://source.unsplash.com/random'
+                    alt=''
+                    className='flex-shrink-0 w-6 h-6 rounded-full select-none'
+                  />
+                  <div className='font-semibold select-none'>{profile.fullName}</div>
+                </div>
+              }
+              className='rounded-none w-max'
+              position='right'
+            >
+              <div>
+                <Link
+                  to='/'
+                  className='flex items-center gap-2 py-4 transition duration-300 border-b cursor-pointer justify-stat hover:text-blue-500'
+                >
+                  <UserIcon></UserIcon>My Profile
+                </Link>
+                <div className='flex items-center justify-start gap-2 py-4 transition duration-300 border-b cursor-pointer hover:text-blue-500'>
+                  <Setting></Setting>Settings
+                </div>
+                <div className='flex items-center justify-start gap-2 py-4 transition duration-300 cursor-pointer hover:text-blue-500'>
+                  {' '}
+                  <Logout></Logout>Logout
+                </div>
+              </div>
+            </PopoverWrapper>
+          )}
         </div>
       </nav>
       <div

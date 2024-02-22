@@ -1,23 +1,23 @@
-export type RegisterData = {
+export type User = {
+  email: string
+  fullName: string
+  role: string
+}
+
+export type SignUpData = {
   name: string
   email: string
   password: string
   confirm_password: string
 }
-export type User = {
-  email: string
-  name: string
-  role: string
-  image?: string
-}
+
+export type LoginData = Pick<SignUpData, 'password' | 'email'>
 
 export type AuthData = {
-  status: string
+  message: string
   data: {
-    token: string
+    access_token: string
     refresh_token: string
     user: User
   }
 }
-
-export type LoginData = Pick<RegisterData, 'password' | 'email'>

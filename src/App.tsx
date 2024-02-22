@@ -8,6 +8,8 @@ import CartContent from './components/Sidebar/CartContent/CartContent'
 import MenuMobileContent from './components/Sidebar/MenuMobileContent/MenuMobileContent'
 import AuthModal from './components/Modal/AuthModal'
 import ProductDetail from './pages/ProductDetail/ProductDetail'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function App() {
   const { pathname } = useLocation()
@@ -19,6 +21,7 @@ function App() {
       <CartContent></CartContent>
       <MenuMobileContent></MenuMobileContent>
       <AuthModal></AuthModal>
+      <ToastContainer />
       <Routes>
         <Route
           path='/'

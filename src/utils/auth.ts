@@ -38,6 +38,6 @@ export const clearLS = () => {
   clearRefreshToken()
   clearAccessTokenFromLS()
   clearUserFromLS()
-  const clearLSEvent = new Event('clearLS')
-  LocalStorageEventTarget.dispatchEvent(clearLSEvent)
+  // const clearLSEvent = new Event('clearLS')
+  // LocalStorageEventTarget.dispatchEvent(clearLSEvent)
 }

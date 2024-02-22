@@ -9,11 +9,13 @@ import { Position } from 'src/@types/general'
 export default function PopoverWrapper({
   parentElement,
   children,
-  position = 'left'
+  position = 'left',
+  className
 }: {
   parentElement: React.ReactNode | React.ReactElement
   children: React.ReactNode
   position?: Position
+  className?: string
 }) {
   const { nodeRef, show, setShow } = useClickOutSide()
   const { coords, elmRef, handleGetElementCoords } = useGetElementCoords()
@@ -28,7 +30,11 @@ export default function PopoverWrapper({
         {parentElement}
       </div>
       {show && (
-        <Popover coords={coords} position={position} className='bg-white rounded-2xl shadow w-[230px] py-6 px-5'>
+        <Popover
+          coords={coords}
+          position={position}
+          className={`bg-white rounded-2xl min-w-[150px] py-2 px-3 shadow-xl border ${className}`}
+        >
           {children}
         </Popover>
       )}
