@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance } from 'axios'
+import axios, { InternalAxiosRequestConfig, type AxiosInstance } from 'axios'
 import { saveAccessTokenToLS, saveRefreshTokenToLS, saveUserToLS, getAccessTokenFromLS, clearLS } from './auth'
 import { AuthData } from 'src/@types/auth'
 
@@ -16,15 +16,16 @@ class Http {
     })
     this.instance.interceptors.request.use(
       (config) => {
-        if (config.headers && this.access_token) {
-          config.headers.Authorization = `Bearer ${this.access_token}`
+        // Do something before request is sent
+        console.log(this.access_token)
+        if (this.access_token && config.headers) {
+          config.headers.authorization = `Bearer ${this.access_token}`
           return config
         }
         return config
       },
       function (error) {
-        // Do something with request error
-        console.log(error)
+        console.log(error.response)
         return Promise.reject(error)
       }
     )
@@ -33,7 +34,7 @@ class Http {
         console.log(response.config.url)
         if (response.config.url === '/auth/login' || response.config.url === '/auth/signup') {
           const data = response.data as AuthData
-          console.log(data)
+          this.access_token = data.data.access_token
           saveAccessTokenToLS(data.data.access_token)
           saveRefreshTokenToLS(data.data.refresh_token)
           saveUserToLS(data.data.user)
@@ -43,9 +44,15 @@ class Http {
         }
         return response
       },
-      async (error) => {}
+      async (error) => {
+        return Promise.reject(error)
+      }
     )
   }
+  setAccessToken = (token: string) => {
+    this.access_token = token
+  }
 }
+
 const http = new Http().instance
 export default http

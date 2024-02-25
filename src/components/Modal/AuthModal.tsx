@@ -11,9 +11,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginData, SignUpData } from 'src/@types/auth'
 import { loginSchema, signUpSchema } from 'src/validators/auth.validator'
 import { useMutation } from '@tanstack/react-query'
-import { loginApi } from 'src/apis/auth.api'
+import { loginApi, signUpApi } from 'src/apis/auth.api'
 import { toast } from 'react-toastify'
 import { AppContext } from 'src/contexts/app.context'
+import { AxiosError, isAxiosError } from 'axios'
+import http from 'src/utils/axios'
+
 export default function AuthModal() {
   const { isAuthenticated, setIsAuthenticated, setProfile } = useContext(AppContext)
   const { open, closeAuth } = useAuthModal((state) => state)
@@ -38,9 +41,25 @@ export default function AuthModal() {
   // Mutation
   const loginMutation = useMutation({
     mutationFn: loginApi,
-    onSuccess: () => {
+    onSuccess: (data) => {
       setIsAuthenticated(true)
       toast.success('Login Successfully!')
+      reset()
+      closeAuth()
+    }
+  })
+
+  const signUpMutation = useMutation({
+    mutationFn: signUpApi,
+    onError(err) {
+      if (isAxiosError(err)) {
+        const errMessage = err?.response?.data.message
+        toast.error(errMessage)
+      }
+    },
+    onSuccess(data) {
+      setIsAuthenticated(true)
+      toast.success('SignUp Successfully!')
       reset()
       closeAuth()
     }
@@ -49,7 +68,9 @@ export default function AuthModal() {
   const onSubmitLogin: SubmitHandler<LoginData> = (data) => {
     loginMutation.mutate(data)
   }
-  const onSubmitSignUp: SubmitHandler<SignUpData> = (data) => console.log(data)
+  const onSubmitSignUp: SubmitHandler<SignUpData> = (data) => {
+    signUpMutation.mutate(data)
+  }
 
   if (isAuthenticated) return null
   return (
@@ -122,13 +143,13 @@ export default function AuthModal() {
           <div className='relative z-0 w-full mb-6 group'>
             <Controller
               control={signUpControl}
-              name='name'
+              name='fullName'
               render={({ field }) => <Input type='text' id='name' {...field}></Input>}
             ></Controller>
-            <Label htmlFor='name'>
+            <Label htmlFor='fullName'>
               Full Name <span className='text-red-600'>*</span>
             </Label>
-            <div className='text-sm font-semibold text-red-500'>{signUpErrors.name?.message}</div>
+            <div className='text-sm font-semibold text-red-500'>{signUpErrors.fullName?.message}</div>
           </div>
           <div className='relative z-0 w-full mb-6 group'>
             <Controller
